@@ -1,0 +1,51 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="roary-visualizer",
+    version="1.0.0",
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    python_requires=">=3.8",
+    install_requires=[
+        "streamlit>=1.24.0",
+        "pandas>=1.5.0",
+        "numpy>=1.22.0",
+        "plotly>=5.13.0",
+        "scipy>=1.9.0",
+        "biopython>=1.80",
+        "psutil>=5.9.0",
+    ],
+    extras_require={
+        "dev": [
+            "pytest>=7.0.0",
+            "pytest-cov>=4.0.0",
+            "black>=23.0.0",
+            "mypy>=1.0.0",
+            "pylint>=2.17.0",
+            "pre-commit>=3.0.0",
+        ],
+    },
+    entry_points={
+        "console_scripts": [
+            "roary-visualizer=roary_visualizer.app.main:main",
+        ],
+    },
+    author="Bioinformatics Team",
+    author_email="team@example.com",
+    description="A production-ready web application for visualizing Roary pangenome analysis output",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    url="https://github.com/example/roary-visualizer",
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Science/Research",
+        "Topic :: Scientific/Engineering :: Bio-Informatics",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+)
