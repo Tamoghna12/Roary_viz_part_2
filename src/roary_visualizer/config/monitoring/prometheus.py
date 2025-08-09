@@ -1,46 +1,56 @@
-from prometheus_client import Counter, Histogram, Gauge, start_http_server
+from prometheus_client import Counter, Histogram, Gauge, start_http_server, CollectorRegistry
 from functools import wraps
 import time
 from typing import Callable, Any
+
+# Create a custom registry to avoid conflicts
+registry = CollectorRegistry()
 
 # Define metrics
 REQUEST_COUNT = Counter(
     'app_request_count',
     'Number of requests received',
-    ['endpoint']
+    ['endpoint'],
+    registry=registry
 )
 
 REQUEST_LATENCY = Histogram(
     'app_request_latency_seconds',
     'Request latency in seconds',
-    ['endpoint']
+    ['endpoint'],
+    registry=registry
 )
 
 MEMORY_USAGE = Gauge(
     'app_memory_usage_bytes',
-    'Memory usage in bytes'
+    'Memory usage in bytes',
+    registry=registry
 )
 
 CPU_USAGE = Gauge(
     'app_cpu_usage_percent',
-    'CPU usage percentage'
+    'CPU usage percentage',
+    registry=registry
 )
 
 FILE_PROCESSING_TIME = Histogram(
     'app_file_processing_seconds',
     'Time spent processing files',
-    ['file_type']
+    ['file_type'],
+    registry=registry
 )
 
 ACTIVE_USERS = Gauge(
     'app_active_users',
-    'Number of active users'
+    'Number of active users',
+    registry=registry
 )
 
 ERROR_COUNT = Counter(
     'app_error_count',
     'Number of errors occurred',
-    ['type']
+    ['type'],
+    registry=registry
 )
 
 def initialize_metrics(port: int = 9090) -> None:
@@ -49,7 +59,7 @@ def initialize_metrics(port: int = 9090) -> None:
     Args:
         port: Port number for the metrics server
     """
-    start_http_server(port)
+    start_http_server(port, registry=registry)
 
 def track_request_count(endpoint: str) -> Callable:
     """Decorator to track request count for endpoints

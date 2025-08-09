@@ -234,16 +234,37 @@ def render_visualizations() -> None:
 def main() -> None:
     """Main application entry point with error handling"""
     st.set_page_config(
-        page_title="Roary Output Visualizer",
+        page_title="Roary Pangenome Visualizer | Professional Bioinformatics Platform",
         layout="wide",
-        page_icon="🧬"
+        page_icon="🧬",
+        menu_items={
+            'About': "Professional pangenome visualization platform for researchers worldwide."
+        }
     )
     
-    st.title("🧬 Roary Output Visualizer")
+    # Header with professional branding
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.title("🧬 Roary Pangenome Visualizer")
+        st.markdown("""
+        <div style='text-align: center; color: #666; margin-bottom: 2rem;'>
+        <h3>Professional Bioinformatics Platform</h3>
+        <p>Transform your pangenome analysis into interactive, publication-ready visualizations</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Key features highlight
     st.markdown("""
-    This application visualizes the output files from [Roary](https://sanger-pathogens.github.io/Roary/), 
-    a tool for pan-genome analysis. Upload your Roary output files to generate interactive visualizations.
-    """)
+    <div style='background-color: #f0f8ff; padding: 1rem; border-radius: 10px; margin-bottom: 2rem;'>
+    <h4>🚀 Key Features</h4>
+    <ul style='margin: 0;'>
+    <li><strong>Interactive Visualizations</strong> - Gene presence/absence matrices, phylogenetic integration</li>
+    <li><strong>Publication Ready</strong> - High-quality plots suitable for research papers</li>
+    <li><strong>High Performance</strong> - Process datasets up to 100MB with optimized algorithms</li>
+    <li><strong>Zero Code Required</strong> - User-friendly interface accessible to all researchers</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Initialize session state
     initialize_session_state()
